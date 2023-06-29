@@ -1,0 +1,12 @@
+management:
+  metrics:
+    tags:
+      application: metrics-app
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info,metric
+
+custom-metrics:
+  counter:
+    name: counter_metric_total

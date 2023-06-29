@@ -1,0 +1,21 @@
+version: '3.2'
+services:
+  prometheus:
+    image: prom/prometheus:v2.35.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yaml
+    volumes:
+      - ../prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SERVER_DOMAIN=localhost
+    depends_on:
+      - prometheus
